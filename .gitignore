@@ -1,5 +1,7 @@
 # User Settings
 
+docker-hub-secret.json
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
