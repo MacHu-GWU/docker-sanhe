@@ -297,7 +297,7 @@ class ImageModel(Model):
             raise ValueError
         try:
             run_and_log_command(["docker", "tag", self.local_identifier, remote_identifier])
-            docker_client.push(self.repo_name, self.tag_name)
+            docker_client.push(f"{self.dockerhub_username}/{self.repo_name}", self.tag_name)
             logger.info("  Success!")
             if self.is_state_exists:
                 self.update(
