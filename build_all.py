@@ -186,7 +186,7 @@ docker_client = docker.from_env()
 # --- Image State DynamoDB backend
 class ImageModel(Model):
     class Meta:
-        table_name = "docker-sanhe-state"
+        table_name = "docker-image-state"
         region = AWS_REGION
 
     identifier = UnicodeAttribute(hash_key=True)
@@ -426,6 +426,7 @@ if __name__ == "__main__":
     success_image_list, failed_image_list = run_build_image(todo_image_list)
 
     if len(success_image_list):
+        logger.info("--- push image to registry ---")
         docker_client.login(username=DOCKER_HUB_USERNAME, password=DOCKER_HUB_PASSWORD)
         for image in success_image_list:
             image.run_docker_push(docker_client)

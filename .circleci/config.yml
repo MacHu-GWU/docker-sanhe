@@ -16,3 +16,4 @@ workflows:
   my-workflow:
     jobs:
       - build_mass_docker_image
+          context: sanhe-docker-hub

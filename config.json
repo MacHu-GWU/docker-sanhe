@@ -1,7 +1,7 @@
 {
     "REGISTRY_SERVICE": "dockerhub", // dockerhub | awsecr
     "AWS_REGION": "us-east-1",
-    "AWS_PROFILE": "eq_sanhe",
+    "AWS_PROFILE": "sanhe_docker_hub_cicd",
     "DOCKER_HUB_USERNAME": "sanhe",
     "IMAGE_REBUILD_INTERVAL": 2592000 // in seconds. 30 Days
 }
