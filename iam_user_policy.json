@@ -11,7 +11,7 @@
                 "dynamodb:GetItem",
                 "dynamodb:UpdateItem"
             ],
-            "Resource": "arn:aws:dynamodb:us-east-1:663351365541:table/docker-image-state"
+            "Resource": "arn:aws:dynamodb:us-east-1:111122223333:table/docker-image-state"
         }
     ]
 }
