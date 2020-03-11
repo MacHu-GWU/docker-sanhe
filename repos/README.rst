@@ -5,7 +5,7 @@ This folder is the root folder for all repository and all tags.
 
 Every sub folder represents a docker repository (image repo root dir). Every sub-sub folder represent a tag (image tag root dir).
 
-For example: ``./repos/cicd`` represents a docker hub repo named ``cicd``, ./repos/cicd/aws-lambda`` represents a tag ``aws-lambda``.
+For example: ``./repos/cicd`` represents a docker hub repo named ``cicd``, ``./repos/cicd/aws-ultimate`` represents a tag ``aws-ultimate``.
 
 WARNING:
 

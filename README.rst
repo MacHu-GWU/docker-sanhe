@@ -1,3 +1,8 @@
+
+.. image:: https://circleci.com/gh/MacHu-GWU/docker-sanhe.svg?style=svg
+    :target: https://circleci.com/gh/MacHu-GWU/docker-sanhe
+
+
 Sanhe Hu's DockerHub CircleCI CI/CD pipeline
 ==============================================================================
 
