@@ -5,9 +5,11 @@ Sanhe Hu's DockerHub CircleCI CI/CD pipeline
 About This Project
 ------------------------------------------------------------------------------
 
-This project is a Best Practice solution that manage **mass number of repositories and tags on DockerHub in single Git repo**. It allows you easily dev, build, test your docker image on your local machine. **Or auto trigger a build, test, publish workflow in CircleCI**.
+This project is a Best Practice solution that manage **mass number of PUBLIC repositories and tags on DockerHub in single Git repo**. It allows you easily dev, build, test your docker image on your local machine. **Or auto trigger a build, test, publish workflow in CircleCI**.
 
 It allows you to spin up a production ready CI/CD pipeline in 10 minutes.
+
+For enterprise user and Private repo. I recommend to use AWS Elastic Container Registry.
 
 
 Setup Project
@@ -66,7 +68,6 @@ Development Workflow
 5. Run ``docker-run.sh`` utility script to run a dev container, then use the ``docker exec -it ...`` command to enter the container.
 6. Figure out the command you want to put in ``RUN`` command or ``bootstrap.sh`` script. **Repeat step #3, #4, #5, #6 to perfect your Dockerfile**.
 7. You can use ``smoke-test.sh`` script to validate your image.
-8. Once you are satisfied with your change. Run ``build_all.py`` script
- to batch build and test.
+8. Once you are satisfied with your change. Run ``build_all.py`` script to batch build and test.
 9. Issue Pull Request for code review.
 10. Once change merged to ``master`` branch, It will build and push latest image to your Registry.
