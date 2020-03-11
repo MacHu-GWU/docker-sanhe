@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# This is a utility script allows you to build the image defined in the current
+# directory.
 
 if [ -n "${BASH_SOURCE}" ]
 then
@@ -12,6 +15,6 @@ dir_repo="$(dirname ${dir_tag})"
 repo_name=$(cat ${dir_repo}/repo_name)
 tag_name=$(cat ${dir_tag}/tag_name)
 
-docker build . -t ${repo_name}:${tag_name}
-#docker image ls
-#docker image rm ""
+docker build . -t ${repo_name}:${tag_name} # identifier without account info
+#docker image ls # list recently built image
+#docker image rm "" # remove recently built image

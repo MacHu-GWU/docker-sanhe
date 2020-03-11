@@ -1,6 +1,7 @@
 FROM python:3.6.8-slim
 COPY bootstrap.sh /tmp/bootstrap.sh
 RUN echo "Start!" \
+    # Specify software versions
     && export PYTHON_PATHLIB_MATE_VERSION="0.0.15" \
     && export PYTHON_CONFIGIRL_VERSION="0.0.9" \
     && export PACKER_VERSION="1.4.4" \

@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# This scripts allow you to quickly run a newly built image and enter it for
-# development or debugging
+# This is a utility script allows you to quickly run a
+# newly built image and enter it for development or debugging
 
 if [ -n "${BASH_SOURCE}" ]
 then

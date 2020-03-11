@@ -1,4 +1,6 @@
 #!/bin/bash
+#
+# docker image installation script
 
 # install pip, virtualenv, awscli and python library
 echo "[Bootstrap] install aws cli"
