@@ -8,7 +8,7 @@ jobs:
       - setup_remote_docker
       - run:
           command: |
-            pip install -r requirements.txt
+            sudo pip install -r requirements.txt
             python build_all.py
 
 workflows:
