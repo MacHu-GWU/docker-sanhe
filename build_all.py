@@ -179,7 +179,11 @@ if runtime == Runtime.local:
     os.environ["AWS_DEFAULT_PROFILE"] = AWS_PROFILE
     os.environ["AWS_DEFAULT_REGION"] = AWS_REGION
 
-    DOCKER_HUB_PASSWORD = get_json_value(PATH_DOCKER_HUB_SECRET, "PASSWORD")
+    try:
+        DOCKER_HUB_PASSWORD = get_json_value(PATH_DOCKER_HUB_SECRET, "PASSWORD")
+    except:
+        DOCKER_HUB_PASSWORD = ""
+
     GIT_BRANCH = ""
 elif runtime == Runtime.circleci:
     AWS_REGION = os.environ["AWS_DEFAULT_REGION"]
@@ -318,11 +322,14 @@ class ImageModel(Model):
                 )
             else:
                 self.save()
+            return True
         except subprocess.CalledProcessError as e:
             logger.info("  Push failed!")
             logger.info("  {}".format(e))
+            return False
         except Exception as e:
             logger.info("  {}".format(e))
+            return False
 
 
 ImageModel.create_table(billing_mode="PAY_PER_REQUEST")
@@ -401,6 +408,8 @@ def run_and_log_command(commands):
 
 def run_build_image(image_list):
     """
+    Build and test Images.
+
     :type image_list: typing.List[ImageModel]
     :param image_list:
 
@@ -431,6 +440,12 @@ def run_build_image(image_list):
 
 
 def run_docker_push(image_list, docker_client):
+    """
+    Push built images to registry.
+
+    :type image_list: typing.List[ImageModel]
+    :param image_list:
+    """
     logger.info("--- push image to registry ---")
     if runtime == Runtime.local:
         logger.info("Detected local runtime, stop here.")
@@ -442,6 +457,7 @@ def run_docker_push(image_list, docker_client):
 
     if GIT_BRANCH != "master":
         logger.info("Not master branch, stop here")
+        return
 
     docker_client.login(username=DOCKER_HUB_USERNAME, password=DOCKER_HUB_PASSWORD)
     for image in image_list:
