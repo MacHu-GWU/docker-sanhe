@@ -139,7 +139,7 @@ def get_dockerfile_md5(dockerfile_path):
     return md5.hexdigest()
 
 
-DIR_HERE = os.path.dirname(__file__)
+DIR_HERE = os.path.abspath(os.path.dirname(__file__))
 DIR_PROJECT_ROOT = DIR_HERE
 
 DIR_CICD = DIR_HERE
@@ -400,7 +400,6 @@ def run_build_image(image_list):
     success_image_list = list()
     failed_image_list = list()
     for image in image_list:
-        logger.info(f"Build docker image in context at {image.dir_tag_root} ...")
         docker_build_success_flag = image.run_docker_build()
         if not docker_build_success_flag:
             failed_image_list.append(image)
