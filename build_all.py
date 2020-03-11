@@ -157,13 +157,21 @@ IMAGE_REBUILD_INTERVAL = get_json_value(PATH_GLOBAL_CONFIG, "IMAGE_REBUILD_INTER
 
 GLOBAL_CONFIG = read_json(PATH_GLOBAL_CONFIG)
 
-# --- Load Configs
-if os.environ.get("CIRCLECI"):
-    runtime = "circleci"
-else:
-    runtime = "local"
 
-if runtime == "local":
+# --- Load Configs ---
+# detect runtime
+class Runtime:
+    local = "local"
+    circleci = "circleci"
+
+
+if os.environ.get("CIRCLECI"):
+    runtime = Runtime.circleci
+else:
+    runtime = Runtime.local
+
+# resolve config
+if runtime == Runtime.local:
     AWS_REGION = get_json_value(PATH_GLOBAL_CONFIG, "AWS_REGION")
     AWS_PROFILE = get_json_value(PATH_GLOBAL_CONFIG, "AWS_PROFILE")
 
@@ -172,10 +180,12 @@ if runtime == "local":
     os.environ["AWS_DEFAULT_REGION"] = AWS_REGION
 
     DOCKER_HUB_PASSWORD = get_json_value(PATH_DOCKER_HUB_SECRET, "PASSWORD")
-elif runtime == "circleci":
+    GIT_BRANCH = ""
+elif runtime == Runtime.circleci:
     AWS_REGION = os.environ["AWS_DEFAULT_REGION"]
     AWS_PROFILE = None
     DOCKER_HUB_PASSWORD = os.environ["DOCKER_HUB_PASS"]
+    GIT_BRANCH = os.environ["CIRCLE_BRANCH"]
 else:
     raise NotImplementedError
 
@@ -420,12 +430,26 @@ def run_build_image(image_list):
     return success_image_list, failed_image_list
 
 
+def run_docker_push(image_list, docker_client):
+    logger.info("--- push image to registry ---")
+    if runtime == Runtime.local:
+        logger.info("Detected local runtime, stop here.")
+        return
+
+    if not len(success_image_list):
+        logger.info("No success image to push, stop here.")
+        return
+
+    if GIT_BRANCH != "master":
+        logger.info("Not master branch, stop here")
+
+    docker_client.login(username=DOCKER_HUB_USERNAME, password=DOCKER_HUB_PASSWORD)
+    for image in image_list:
+        image.run_docker_push(docker_client)
+    print("Finished.")
+
+
 if __name__ == "__main__":
     todo_image_list = plan_image_to_build()
     success_image_list, failed_image_list = run_build_image(todo_image_list)
-
-    if len(success_image_list):
-        logger.info("--- push image to registry ---")
-        docker_client.login(username=DOCKER_HUB_USERNAME, password=DOCKER_HUB_PASSWORD)
-        for image in success_image_list:
-            image.run_docker_push(docker_client)
+    run_docker_push(success_image_list, docker_client)
