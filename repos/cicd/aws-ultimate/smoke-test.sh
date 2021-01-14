@@ -53,4 +53,8 @@ echo "is serverless installed?"
 docker exec -t "${container_name}" serverless --version
 check_exit_status $?
 
+echo "is ansible installed?"
+docker exec -t "${container_name}" ansible --version
+check_exit_status $?
+
 docker container stop "${container_name}"

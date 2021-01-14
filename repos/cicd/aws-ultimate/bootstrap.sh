@@ -38,7 +38,6 @@ unzip "${HOME}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" -d "${HOME}"
 mv "${HOME}/terraform" "/usr/local/bin"
 rm "${HOME}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
 
-
 # install node.js for serverless
 echo "[Bootstrap] install serverless"
 curl -sL https://deb.nodesource.com/setup_12.x | bash -
@@ -46,3 +45,8 @@ apt-get install -y nodejs
 
 # install serverless
 npm install -g "serverless@${SERVERLESS_VERSION}"
+
+# install ansible
+apt-get install -y software-properties-common
+apt-add-repository --yes --update ppa:ansible/ansible
+apt-get install -y ansible

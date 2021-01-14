@@ -2,9 +2,9 @@ FROM python:3.6.8-slim
 COPY bootstrap.sh /tmp/bootstrap.sh
 RUN echo "Start!" \
     # Specify software versions
-    && export PYTHON_PATHLIB_MATE_VERSION="0.0.15" \
-    && export PYTHON_CONFIGIRL_VERSION="0.0.9" \
-    && export PACKER_VERSION="1.4.4" \
-    && export TERRAFORM_VERSION="0.12.20" \
-    && export SERVERLESS_VERSION="1.61.3" \
+    && export PYTHON_PATHLIB_MATE_VERSION="1.0.1" \
+    && export PYTHON_CONFIGIRL_VERSION="0.0.10" \
+    && export PACKER_VERSION="1.6.6" \
+    && export TERRAFORM_VERSION="0.14.4" \
+    && export SERVERLESS_VERSION="2.18.0" \
     && bash /tmp/bootstrap.sh

@@ -7,14 +7,25 @@ Sanhe Hu's DockerHub CircleCI CI/CD pipeline
 ==============================================================================
 
 
-About This Project
+What Problem this Project Solves
 ------------------------------------------------------------------------------
 
-This project is a Best Practice solution that manage **mass number of PUBLIC repositories and tags on DockerHub in single Git repo**. It allows you easily dev, build, test your docker image on your local machine. **Or auto trigger a build, test, publish workflow in CircleCI**.
+This project is a Highly Scalable, Highly Configurable CI/CD Solution that manage **MASS number of docker repositories and tags in SINGLE Git Repo, SINGLE CI/CD Pipeline**.
 
-It allows you to spin up a production ready CI/CD pipeline in 10 minutes.
+It **automates** the docker image **BUILD, TEST and PUBLISH workflow at scale**.
 
-For enterprise user and Private repo. I recommend to use AWS Elastic Container Registry.
+It also provides **a local development tool and a standardized development workflow allowing ENTRY LEVEL ENGINEER to develop reliable docker image with confidence**.
+
+It is configurable to **adapt Public repo with DockerHub, PRIVATE repo with AWS Elastic Container Registry**. And it ships with built-in support for **isolated MULTI ENVIRONMENT** ``dev / test / prod`` etc ...
+
+
+Why This Solution is Valuable
+------------------------------------------------------------------------------
+
+1. There are many different ways you can use GitHub to automate docker image build. Most of them **you need to setup CI/CD pipeline for each repository MANY TIMES**. In other word, it doesn't scale.
+2. Setup for Public Repo and Private Repo varies a lot, and a production-ready project usually uses multi environment, which is not easy to implement it right. This solution use declarative config file, which is a simple JSON, automates most of technique overhead, allows you to **deploy this solution to your OWN ENVIRONMENT quickly in ONE HOUR**.
+3. The framework used in this Solution designed to be easy-to-learn for **ENTRY LEVEL ENGINEER**. And lots of built-in **DUMMY-PROOF** mechanism prevent you from doing evil things.
+
 
 
 Setup Project
