@@ -33,6 +33,10 @@ echo "is boto3 installed?"
 docker exec -t "${container_name}" pip list | grep boto3
 check_exit_status $?
 
+echo "is ansible installed?"
+docker exec -t "${container_name}" ansible --version
+check_exit_status $?
+
 echo "is configirl installed?"
 docker exec -t "${container_name}" pip list | grep configirl
 check_exit_status $?
@@ -51,10 +55,6 @@ check_exit_status $?
 
 echo "is serverless installed?"
 docker exec -t "${container_name}" serverless --version
-check_exit_status $?
-
-echo "is ansible installed?"
-docker exec -t "${container_name}" ansible --version
 check_exit_status $?
 
 docker container stop "${container_name}"

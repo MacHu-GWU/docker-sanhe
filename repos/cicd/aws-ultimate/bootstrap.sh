@@ -10,8 +10,11 @@ pip install boto3 --no-cache-dir
 
 echo "[Bootstrap] install python libraries"
 pip install virtualenv --no-cache-dir
+pip install boto3
+pip install ansible
 pip install pathlib_mate=="${PYTHON_PATHLIB_MATE_VERSION}" --no-cache-dir
 pip install configirl=="${PYTHON_CONFIGIRL_VERSION}" --no-cache-dir
+pip install pysecret=="${PYTHON_PYSECRET_VERSION}" --no-cache-dir
 
 # install linux tool
 echo "[Bootstrap] install linux tool"
@@ -45,8 +48,3 @@ apt-get install -y nodejs
 
 # install serverless
 npm install -g "serverless@${SERVERLESS_VERSION}"
-
-# install ansible
-apt-get install -y software-properties-common
-apt-add-repository --yes --update ppa:ansible/ansible
-apt-get install -y ansible
